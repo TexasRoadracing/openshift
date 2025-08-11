@@ -1,0 +1,32 @@
+---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  generation: 1
+  labels:
+    app.kubernetes.io/managed-by: aap-operator
+    app.kubernetes.io/name: aap
+    app.kubernetes.io/operator-version: '2.5'
+    app.kubernetes.io/part-of: aap
+  name: aap
+  namespace: ansible-automation-platform
+spec:
+  route_tls_termination_mechanism: Edge
+  admin_password_secret: aap-controller-admin-password
+  service_type: ClusterIP
+  ingress_type: Route
+  no_log: false
+  redis_mode: standalone
+  image_pull_policy: Always
+  hostname: automationplatform.apps.trrocp4.texasroadracing.com
+  api:
+    log_level: INFO
+    replicas: 1
+  database:
+    postgres_data_volume_init: false
+    postgres_storage_class: nfs-client
+  route_host: automationplatform.apps.trrocp4.texasroadracing.com
+  hub:
+    file_storage_storage_class: nfs-client
+    redis_storage_class: nfs-client
+...
